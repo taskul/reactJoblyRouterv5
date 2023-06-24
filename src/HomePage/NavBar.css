@@ -1,0 +1,124 @@
+/* mobile view */
+
+.NavBar {
+    background-color: #1C226B;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.NavBar-mobile-menu {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 30px;
+    cursor: pointer;
+}
+
+.NavBar-mobile-menu .bar {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease;
+    margin: 4px 0px;
+}
+
+.NavBar-links {
+    position: absolute;
+    /* top: 50px; */
+    top: -400px;
+    left: -400px;
+    display: flex;
+    flex-direction: column;
+
+    width: 200px;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    list-style-type: none;
+
+    max-height: 200px;
+    background-color: #1C226B;
+}
+
+.NavBar-links.active {
+    top: 50px;
+    left: 0px;
+    transition: all 0.5s ease;
+}
+
+.NavBar-userNav {
+    display: flex;
+    flex-direction: column;
+}
+
+.NavBar-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.NavBar-link {
+    margin: 5px 10px;
+    padding: 10px;
+    border-top: 0.3px solid #cccccc6e;
+    border-bottom: 0.3px solid #cccccc6e;
+}
+
+.NavBar-mobile-menu.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .NavBar-mobile-menu.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 8px);
+  }
+
+  .NavBar-mobile-menu.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-6px, -9px);
+  }
+
+.NavBar-logo-img {
+    width: 80px;
+    height: 40px;
+    margin: 0px 20px;
+}
+
+/* desktop view */
+@media (min-width: 40rem) {
+    .NavBar-links {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: auto;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .NavBar-link {
+        border: none;
+        margin: 0px;
+    }
+
+    .NavBar-mobile-menu {
+        display: none;
+    }
+
+    .NavBar-logo-img {
+        position: absolute;
+        left: 45%;
+        z-index: 10;
+    }
+
+    .NavBar-userNav {
+        display: flex;
+        flex-direction: row;
+    }
+
+}
+

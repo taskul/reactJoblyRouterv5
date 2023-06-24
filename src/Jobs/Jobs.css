@@ -1,0 +1,36 @@
+/* mobile view */
+
+.Jobs-list {
+    width: 80vw;
+    margin: 0px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.Job-thumbnail {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80vw;
+    padding: 10px 15px;
+    margin: 10px 0px;
+    background-color: #537FE7;
+    border: 1px solid #1C226B;
+    border-radius: 20px;
+    color: white
+}
+
+.Job-thumbnail-text {
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+}
+
+/* desktop view */
+@media (min-width: 40rem) {
+    .Job-thumbnail {
+        width: 30vw;
+    }
+}

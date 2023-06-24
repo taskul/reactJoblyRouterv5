@@ -1,0 +1,27 @@
+/* mobile view */
+
+.Company-Page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Company-Banner {
+    background-color: #ECF2FF;
+    padding: 10px 20px;
+    margin: 20px;
+    color: #2C3333;
+
+    border-radius: 20px;
+}
+
+.Company-Banner-text {
+    text-align: left;
+}
+
+.Company-Jobs {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
