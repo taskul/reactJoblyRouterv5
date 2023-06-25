@@ -4,7 +4,7 @@ import { useParams, } from "react-router-dom";
 
 
 export default function UserProfile() {
-    const { currentUser, getCurrentUser, gettoken } = useContext(AuthContext)
+    const { currentUser, getCurrentUser, token } = useContext(AuthContext)
     const { username } = useParams();
     console.log('Current USER', currentUser)
 

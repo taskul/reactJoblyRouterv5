@@ -16,6 +16,11 @@ export default function NavBar({ logout }) {
         setIsOpen(false)
     }
 
+    const handleLogout = () => {
+        logout()
+        closeNavbar()
+    }
+
     return (
         <nav className="NavBar">
             <div
@@ -36,9 +41,15 @@ export default function NavBar({ logout }) {
                     // if user logged in show profile and logout links
                     <div className="NavBar-userNav">
                         <li className="NavBar-link" onClick={closeNavbar}>
+                            <NavLink to='/companies'>Companies</NavLink>
+                        </li>
+                        <li className="NavBar-link" onClick={closeNavbar}>
+                            <NavLink to='/jobs'>Jobs</NavLink>
+                        </li>
+                        <li className="NavBar-link" onClick={closeNavbar}>
                             <NavLink to='/profile'>Profile</NavLink>
                         </li>
-                        <li className="NavBar-link" onClick={logout}>
+                        <li className="NavBar-link" onClick={handleLogout}>
                             <NavLink to='/'>Logout</NavLink>
                         </li>
                     </div>

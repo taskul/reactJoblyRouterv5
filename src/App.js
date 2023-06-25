@@ -1,34 +1,35 @@
 import './App.css';
-import NavBar from './HomePage/NavBar';
+import NavBar from './Nav/NavBar';
 import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import AuthContext from './Context/AuthContext';
 import JoblyApi from './API/api';
-import AppRoutes from './HomePage/AppRoutes';
+import AppRoutes from './Routes/AppRoutes';
 import jwtDecode from 'jwt-decode';
 import useLocalStorage from './Hooks/useLocalStorage';
 
+export const JOBLY_TOKEN = 'jobly_token'
+
 
 function App() {
-  const [token, setToken] = useState('');
+  // const [token, setToken] = useState('');
   const [currentUser, setCurrentUser] = useState('');
-  const [localData, setLocalData] = useLocalStorage();
+  const [token, setToken] = useLocalStorage(JOBLY_TOKEN);
 
   async function getCurrentUser() {
-    try {
-      if (token) {
+    if (token) {
+      try {
         const { username } = jwtDecode(token)
-        console.log('USERNAME', username)
         // put the token on the Api class so it can use it to call the API.
         JoblyApi.token = token;
         let user = await JoblyApi.getCurrentUser(username)
         if (user) {
           setCurrentUser(user)
         }
+      } catch (e) {
+        console.log('Getting user error', e)
+        setCurrentUser(null);
       }
-    } catch (e) {
-      console.log('Getting user error', e)
-      setCurrentUser(null);
     }
   }
 
@@ -37,7 +38,6 @@ function App() {
       const res = await JoblyApi.login(userData);
       setToken(res);
       const decoded = jwtDecode(res)
-      console.log('TOKEN', decoded)
       return { success: true };
     } catch (e) {
       console.log('failed to login', e);
@@ -57,8 +57,8 @@ function App() {
   };
 
   const logout = () => {
-    setToken('')
-    setCurrentUser('')
+    setToken(null)
+    setCurrentUser(null)
 
   }
 
