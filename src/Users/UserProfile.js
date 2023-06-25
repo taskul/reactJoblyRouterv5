@@ -3,12 +3,11 @@ import AuthContext from "../Context/AuthContext";
 import { useParams, } from "react-router-dom";
 
 
-export default function UserProfile({ loginUser }) {
-    const { currentUser, token } = useContext(AuthContext)
+export default function UserProfile() {
+    const { currentUser, getCurrentUser, gettoken } = useContext(AuthContext)
     const { username } = useParams();
+    console.log('Current USER', currentUser)
 
-    if (username !== currentUser) {
-    }
 
     return (
         <div className="AuthForm">

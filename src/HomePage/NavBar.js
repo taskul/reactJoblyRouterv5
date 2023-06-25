@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import "./NavBar.css";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink } from "react-router-dom";
 import logo from "../logo.png";
 import AuthContext from "../Context/AuthContext";
 
 export default function NavBar({ logout }) {
     const [isOpen, setIsOpen] = useState(false);
-    const { currentUser, token } = useContext(AuthContext)
+    const { currentUser } = useContext(AuthContext)
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);

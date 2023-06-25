@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import LoadingSpinner from "../LoadingSpinner";
 import CompanyTumbnail from "./CompanyTumbnail";
 
-export default function Companies () {
+export default function Companies() {
     const [companiesData, setCompaniesData] = useState(null);
     // keeps track of search input field
     const [searchFieldData, setSearchFieldData] = useState('');
@@ -14,22 +14,32 @@ export default function Companies () {
     const [searchedName, setSearchedName] = useState(null);
     // using for storing response array
     const [searchResults, setSearchResults] = useState(null);
-    
+    // control clearing search results
+    const [clearSearchResults, setClearSearchResults] = useState(false);
+
     // fetches data on all companies
     useEffect(() => {
         async function getCompanies() {
-           setCompaniesData(await JoblyApi.getAllCompanies())
+            setCompaniesData(await JoblyApi.getAllCompanies())
         };
         getCompanies();
-    }, []);
+    }, [clearSearchResults]);
+
+    // function to clear search results
+    const clearResults = () => {
+        setClearSearchResults(!clearSearchResults)
+        setSearchResults('')
+        setSearchedName('')
+    }
 
     // fetches data on based on search key word
     // keeps track of searchedName which is set by handleSubmit function
     useEffect(() => {
         async function searchCompanyNames() {
             if (searchedName) {
-            setSearchResults(await JoblyApi.findCompanyByName(searchedName))
-            }}
+                setSearchResults(await JoblyApi.findCompanyByName(searchedName))
+            }
+        }
         searchCompanyNames()
     }, [searchedName])
 
@@ -55,8 +65,15 @@ export default function Companies () {
 
     return (
         <div>
+            {searchResults ?
+                <button onClick={clearResults}
+                    className="Companies-clear-btn"
+                >Clear</button>
+                :
+                null
+            }
             <form onSubmit={handleSubmit} className="Form">
-                <input 
+                <input
                     type="text"
                     id="searchCompanies"
                     name="searchCompanies"
@@ -69,8 +86,8 @@ export default function Companies () {
             </form>
             <h1>Companies that have profiles on Jobly</h1>
             <div className="Compnaies-list">
-                {dataDisplayed.map(comp => 
-                    <CompanyTumbnail 
+                {dataDisplayed.map(comp =>
+                    <CompanyTumbnail
                         key={uuidv4()}
                         name={comp.name}
                         handle={comp.handle}

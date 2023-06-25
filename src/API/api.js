@@ -22,8 +22,8 @@ class JoblyApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -50,7 +50,7 @@ class JoblyApi {
   };
 
   /** Search compnay names to find specific company */
-  static async findCompanyByName(searchKeyWord){
+  static async findCompanyByName(searchKeyWord) {
     let res = await this.request(`companies/?name=${searchKeyWord}`)
     return res.companies;
   }
@@ -61,9 +61,20 @@ class JoblyApi {
     return res.jobs;
   }
 
-  static async register(formData) {
+  static async signup(formData) {
     let res = await this.request(`auth/register`, formData, 'post');
-    return res;
+    return res.token;
+  }
+
+  static async login(formData) {
+    let res = await this.request(`auth/token`, formData, 'post');
+    return res.token;
+  }
+
+  // call back end API which has middleware that will check if we are admin or current user
+  static async getCurrentUser(username) {
+    let res = await this.request(`users/${username}`)
+    return res.user.username;
   }
 }
 

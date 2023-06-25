@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../MainCss/Forms.css"
+import { useNavigate } from "react-router-dom";
 
 export default function Register({ signup }) {
     const INITIAL_DATA = {
@@ -12,6 +13,7 @@ export default function Register({ signup }) {
     }
 
     const [registerFormData, setRegisterFormData] = useState(INITIAL_DATA);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -21,9 +23,12 @@ export default function Register({ signup }) {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        signup(registerFormData);
+        let result = await signup(registerFormData);
+        if (result.success) {
+            navigate('/profile')
+        }
         setRegisterFormData(INITIAL_DATA);
     }
 

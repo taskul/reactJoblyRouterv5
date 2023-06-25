@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import "../MainCss/Forms.css"
 
 export default function Login({ loginUser }) {
@@ -7,6 +8,8 @@ export default function Login({ loginUser }) {
         password: ""
     }
     const [loginFormData, setLoginFormData] = useState(INITIAL_DATA);
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setLoginFormData(formData => ({
@@ -18,6 +21,9 @@ export default function Login({ loginUser }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let result = await loginUser(loginFormData);
+        if (result.success) {
+            navigate('/profile')
+        }
         setLoginFormData(INITIAL_DATA);
     }
 

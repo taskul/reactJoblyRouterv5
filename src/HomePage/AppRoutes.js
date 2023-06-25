@@ -1,5 +1,6 @@
-import { Switch, Route, Redirect } from "react-router-dom";
-import Login from "../Users/Login";
+// import { Switch, Route, Redirect } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import Login from "../Users/Login"
 import Register from '../Users/Register';
 import UserProfile from '../Users/UserProfile';
 import Companies from '../Companies/Companies';
@@ -9,33 +10,19 @@ import HomePage from "./HomePage";
 
 
 
-function AppRoutes ({login, signup}) {
+function AppRoutes({ login, signup }) {
     return (
         <div>
-            <Switch>
-                <Route path="/">
-                    <HomePage />
-                </Route>
-                <Route path="/login">
-                    <Login loginUser={login} />
-                </Route>
-                <Route path="/register">
-                    <Register signup={signup} />
-                </Route>
-                <Route exact path="/companies">
-                    <Companies />
-                </Route>
-                <Route exact path="/companies/:company_handle">
-                    <Company />
-                </Route> 
-                <Route exact path="/jobs">
-                    <Jobs />
-                </Route>
-                <Route exact path="/profile">
-                    <UserProfile />
-                </Route>
-                <Redirect to="/" />
-            </Switch>
+            <Routes>
+                <Route exact path="/" element={<HomePage />} />
+                <Route exact path="/login" element={<Login loginUser={login} />} />
+                <Route exact path="/register" element={<Register signup={signup} />} />
+                <Route exact path="/companies" element={<Companies />} />
+                <Route exact path="/companies/:company_handle" element={<Company />} />
+                <Route exact path="/jobs" element={<Jobs />} />
+                <Route exact path="/profile" element={<UserProfile />} />
+
+            </Routes>
         </div>
     )
 }
